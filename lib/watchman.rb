@@ -1,3 +1,3 @@
 module Watchman
-  # Your code goes here...
+  autoload :Client,"watchman/client"
 end
