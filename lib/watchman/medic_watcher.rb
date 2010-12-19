@@ -20,6 +20,10 @@ module Watchman
       count_available(/TruckID=M(11|15|21|22|23)\d/)
     end
     
+    def county_status
+      count_available(/TruckID=M(11|13|15|21|22|23|24)\d/)
+    end
+    
     private
     
     def cookie

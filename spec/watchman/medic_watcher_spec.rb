@@ -10,16 +10,16 @@ describe "Watchman::MedicWatcher" do
   end
   
   let(:watcher){ MedicWatcher.new}
-  
-  describe "fetching the medic page" do
-    it "can pull the medic apparatus page" do
-      watcher.raw_page.should =~ /M131/
-    end
+
+  it "can pull the medic apparatus page" do
+    watcher.raw_page.should =~ /M131/
   end
-  
-  describe "city status" do
-    it "can count the medic units in the city" do
-      watcher.city_status.should == 4
-    end
+
+  it "can count the medic units in the city" do
+    watcher.city_status.should == 4
+  end
+
+  it "counts the medic units in the county" do
+    watcher.county_status.should == 6
   end
 end
