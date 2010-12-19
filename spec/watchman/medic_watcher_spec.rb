@@ -22,4 +22,8 @@ describe "Watchman::MedicWatcher" do
   it "counts the medic units in the county" do
     watcher.county_status.should == 6
   end
+  
+  it "can find the status of one medic unit" do
+    watcher.status_of("131").should == "AVL"
+  end
 end
