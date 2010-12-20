@@ -1,15 +1,31 @@
 class IstatusMocker
-  def self.fake_medic_path(host)
-    FakeWeb.register_uri(:get, "http://#{host}/",
-                         'content-type'=>"text/html", 
-                         :body => LOGIN_PAGE_HTML)
-    FakeWeb.register_uri(:post,"http://#{host}/UserLoginSubmit.php",
-                         'content-type'=>"text/html",
-                         :body => "logged in")
-     FakeWeb.register_uri(:get,"https://#{host}/AjaxTS2.php",
-                          'content-type'=>"text/html",
-                          :body => MEDIC_PAGE_HTML)
+  
+  class << self
+    def fake_login(host)
+      FakeWeb.register_uri(:get, "http://#{host}/",
+                           'content-type'=>"text/html", 
+                           :body => LOGIN_PAGE_HTML)
+      FakeWeb.register_uri(:post,"http://#{host}/UserLoginSubmit.php",
+                           'content-type'=>"text/html",
+                           :body => "logged in")
+    end
+    
+    def fake_medic_path(host)
+      fake_login(host)
+      FakeWeb.register_uri(:get,"https://#{host}/AjaxTS2.php",
+                            'content-type'=>"text/html",
+                            :body => MEDIC_PAGE_HTML)
+    end
+    
+    def fake_call_path(host,incident_number)
+      fake_login(host)
+      FakeWeb.register_uri(:get,"https://#{host}/DisplayCall.php?Incid=#{incident_number}",
+                           'content-type'=>"text/html",
+                           :body => INCIDENT_HTML)
+    end
   end
+  
+  
   
   LOGIN_PAGE_HTML = %Q{    
     			<HTML>
@@ -1051,5 +1067,474 @@ class IstatusMocker
     	&lt;/BODY&gt;
     </noframes>
     </html>
+  }
+  
+  INCIDENT_HTML = %Q{
+    
+    			<HTML>
+    			<HEAD>
+    				<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    				<!--<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">-->
+    				<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">				
+    				<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    				<META HTTP-EQUIV="EXPIRES" CONTENT="0">
+    				<TITLE>EnRoute I-STATUS - Version 5.10</TITLE>
+    				<LINK REL="stylesheet" HREF="DisplayFormat.css" TYPE="text/css">
+    				            <script language="javascript">
+                   //bring the page to foreground
+                   this.focus();
+                </script>				
+    			</HEAD>
+    			<BODY CLASS="Detail"  j=l>
+    			<H3 class="Status">Prior Fire Incident: 201023687</H3><table cellpadding="0" cellspacing="0" width="100%"><tr width="100%"><td valign="top" width="50%"><table cellpadding="0" cellspacing="0" width="100%"><tr><th class="Detail" align="left" width=$cw>Location</th><td class="Detail" align="left" colspan="3"><a href="SearchDStatsSubmit.php?Address=7750 HIGHWAY AB E-BC">7750 HIGHWAY AB E-BC</a></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Building</TH> 
+    <TD CLASS='Detail' COLSPAN=3> 
+                                                                               </TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Nature</TH> 
+    <TD CLASS='Detail' COLSPAN=3> 
+    69D9-SML NON DWEL STR FIRE</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Priority</TH> 
+    <TD CLASS='Detail' width=110px> 
+    2</TD> 
+    <TH CLASS='Detail' align=left width=100px> 
+    Dispatch Code</TH> 
+    <TD CLASS='Detail' > 
+    BOX  </TD> 
+    </tr><tr><TH CLASS='Detail' align=left> 
+    Grid</TH> 
+    <TD CLASS='Detail' width=110px> 
+    34123B    </TD> 
+    <TH CLASS='Detail' align=left width=100px> 
+    Map</TH> 
+    <TD CLASS='Detail' > 
+              </TD> 
+    </tr><tr><TH CLASS='Detail' align=left> 
+    Fire Area</TH> 
+    <td class="Detail" COLSPAN="3">19-17B  </td></tr><tr><TH CLASS='Detail' align=left> 
+    Cross1</TH> 
+    <td class="Detail" COLSPAN="3">RANGELINE RD S</td></tr><tr><TH CLASS='Detail' align=left> 
+    Cross2</TH> 
+    <td class="Detail" COLSPAN="3">HIGHWAY 63 S SB</td></tr><tr><th class="Detail" align="left">Hyd1</th><td class="Detail" width=$dw></td><th class="Detail" align="left" width=$cw>Hyd2</th><td class="Detail"></td></tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Complainant</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    JEROME</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Callback</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    5734410736</TD> 
+    </tr><tr><th class="Detail" align="left" width=$cw>Dispatcher</th><td class="Detail" width=$dw>AMS  </td><th class="Detail" align="left" width=$cw>CallTaker</th><td class="Detail">ALL  </td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    DispO</TH> 
+    <TD CLASS='Detail' > 
+    ND</TD> 
+    <TH CLASS='Detail' align=left width=100px> 
+    Meth. Alarm</TH> 
+    <TD CLASS='Detail' > 
+    2         </TD> 
+    </tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Inc Date/Time</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    12/19/2010 14:15:05</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    On Scene</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    12/19/2010 14:27:09</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Upgrade</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    00:00:00</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Pat Contact</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    01/01/1970 00:00:00</TD> 
+    </tr></table></td><td valign="top" align="center" width="50%"><table border="1" bordercolor="#76a5b6" cellpadding="0" cellspacing="0" width="90%"><TR > 
+    <TH CLASS='Detail' align=left> 
+    Apparatus</TH> 
+    <TH CLASS='Detail' align="center"> 
+    DSP</TH> 
+    <TH CLASS='Detail' align="center"> 
+    ENR</TH> 
+    <TH CLASS='Detail' align="center"> 
+    ONS</TH> 
+    <TH CLASS='Detail' align="center"> 
+    Tran</TH> 
+    <TH CLASS='Detail' align="center"> 
+    OSH</TH> 
+    <TH CLASS='Detail' align="center"> 
+    AVL</TH> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    E1701     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:16:52</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:23:17</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:30:36</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:17:49</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    E1901     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:16:52</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:20:30</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:27:09</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:20:06</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    M241      </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:16:52</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:20:16</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:27:51</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:32:56</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    S1704     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:16:52</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:25:25</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:33:08</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    T1702     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:16:52</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:33:37</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    T1705     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:16:52</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:26:14</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:33:29</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    E1501     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:22:27</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:24:20</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:28:19</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:09:11</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    C1515     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:23:49</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:23:55</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:09:23</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='Detail AVL' > 
+    C1716     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:24:44</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:24:48</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:32:09</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:20:47</TD> 
+    </TR> 
+    </table></td></tr><tr><td colspan="4"><hr color=navy></td></tr><tr><table cellpadding="1" cellspacing="0" width="100%"><tr><th class="Detail" align="left" width=$cw>Notes</th><td class="Detail" colspan=3"><table cellpadding="1" cellspacing="0" width="100%"><TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>UNIT     TYPE  DISPATCH   RESPOND    ON-SCENE   TRANSPORT   AT HOSP.   AVAILABLE</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>-------  ----  --------   --------   --------   ---------   --------   --------</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>E1901     E    14:16:52   14:20:30   14:27:09                          15:20:06</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>E1701     E    14:16:52   14:23:17   14:30:36                          15:17:49</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>T1705     T    14:16:52   14:26:14                                     14:33:29</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>T1702     T    14:16:52                                                14:33:37</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>S1704     S    14:16:52   14:25:25                                     14:33:08</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>M241      M    14:16:52   14:20:16   14:27:51                          14:32:56</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>E1501     E    14:22:27   14:24:20   14:28:19                          15:09:11</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>C1515     C    14:23:49              14:23:55                          15:09:23</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">00:00:00 &nbsp;</td><TD CLASS='Notes' > 
+    <pre>C1716     C    14:24:44   14:24:48   14:32:09                          15:20:47</pre></TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:05 &nbsp;</td><TD CLASS='Notes' > 
+    Complainant: JEROME, Phone: 5734410736</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:05 &nbsp;</td><TD CLASS='Notes' > 
+    Response area: 19-17B</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:06 &nbsp;</td><TD CLASS='Notes' > 
+    *CITY: BC-BOONE COUNTY </TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:59 &nbsp;</td><TD CLASS='Notes' > 
+    ProQAF Determinant Code: 69D6</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:59 &nbsp;</td><TD CLASS='Notes' > 
+    ProQAF Structure Fire.  Residential</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:59 &nbsp;</td><TD CLASS='Notes' > 
+    ProQAF (single).Caller Statement: FIRE.</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:59 &nbsp;</td><TD CLASS='Notes' > 
+    Complainant name changed to JEROME in ProQAF</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:15:59 &nbsp;</td><TD CLASS='Notes' > 
+    ProQAF Number: 0010003115</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:16:50 &nbsp;</td><TD CLASS='Notes' > 
+    ProQAF (single).Caller Statement: FIRE.  6.No one</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:16:50 &nbsp;</td><TD CLASS='Notes' > 
+    ProQAF is trapped inside the structure.</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:16:51 &nbsp;</td><TD CLASS='Notes' > 
+    *NOTIFY CFD, CF2-WITT, CF3-MARTIN OF (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:16:51 &nbsp;</td><TD CLASS='Notes' > 
+    *WORKING STRUCTURE FIRES (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:16:52 &nbsp;</td><TD CLASS='Notes' > 
+    Fire service incident 201023687 (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:17:04 &nbsp;</td><TD CLASS='Notes' > 
+    TAC CHANNEL BF1 ASSIGNED (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:20:12 &nbsp;</td><TD CLASS='Notes' > 
+    OUT BUILDING ONFIRE (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:20:16 &nbsp;</td><TD CLASS='Notes' > 
+    Unit M241 Pressed Enroute</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:21:02 &nbsp;</td><TD CLASS='Notes' > 
+    !***Nature changed via ProQAF From: </TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:21:02 &nbsp;</td><TD CLASS='Notes' > 
+    !69D6-RES STR FIRE</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:21:02 &nbsp;</td><TD CLASS='Notes' > 
+    RCF ProQAF Determinant Code: 69D9</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:21:02 &nbsp;</td><TD CLASS='Notes' > 
+    RCF ProQAF Structure Fire.  Small NON-DWELLING</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:21:02 &nbsp;</td><TD CLASS='Notes' > 
+    RCF ProQAF building/structure (shed, detached</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:21:02 &nbsp;</td><TD CLASS='Notes' > 
+    RCF ProQAF garage).Caller Statement: FIR.  6.No</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:21:02 &nbsp;</td><TD CLASS='Notes' > 
+    RCF ProQAF one is trapped inside the structure.</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:23:28 &nbsp;</td><TD CLASS='Notes' > 
+    T1705 TIMER SET TO 5 MINUTE(S) (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:23:28 &nbsp;</td><TD CLASS='Notes' > 
+    T1702 TIMER SET TO 5 MINUTE(S) (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:23:29 &nbsp;</td><TD CLASS='Notes' > 
+    S1704 TIMER SET TO 5 MINUTE(S) (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:23:55 &nbsp;</td><TD CLASS='Notes' > 
+    C1515 went in command 14:23:55 (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:24:06 &nbsp;</td><TD CLASS='Notes' > 
+    ProQAF garage).Caller Statement: FIR.  6.No one</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:24:17 &nbsp;</td><TD CLASS='Notes' > 
+    *SMALL FIVE BY FIVE OUTSIDE BUILDING (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:24:17 &nbsp;</td><TD CLASS='Notes' > 
+    *SMOKE SHOWING (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:27:51 &nbsp;</td><TD CLASS='Notes' > 
+    Unit M241 Pressed On scene</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:28:04 &nbsp;</td><TD CLASS='Notes' > 
+    Tactical channel changed from BF1 to (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:28:04 &nbsp;</td><TD CLASS='Notes' > 
+    GLD (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:28:12 &nbsp;</td><TD CLASS='Notes' > 
+    ALL UNITS REPORT TO GOLD (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:28:57 &nbsp;</td><TD CLASS='Notes' > 
+    T1702 TIMER SET TO 5 MINUTE(S) (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:32:49 &nbsp;</td><TD CLASS='Notes' > 
+    Mark Inc Under Ctrl updated from: 12/19/10 (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:32:50 &nbsp;</td><TD CLASS='Notes' > 
+    14:32:48 (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:32:57 &nbsp;</td><TD CLASS='Notes' > 
+    Unit M241 Pressed Available</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">14:49:22 &nbsp;</td><TD CLASS='Notes' > 
+    C1515 TIMER SET TO 20 MINUTE(S) (00000174-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">15:09:21 &nbsp;</td><TD CLASS='Notes' > 
+    C1515 W/ BCFPD RPRT (00000154-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">15:20:15 &nbsp;</td><TD CLASS='Notes' > 
+    C1747 W/ SBCFPD RPRT (00000154-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">15:20:49 &nbsp;</td><TD CLASS='Notes' > 
+    *Fire incident 201023687 closed (00000154-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">15:20:49 &nbsp;</td><TD CLASS='Notes' > 
+    Report written for FDID 01004 201023687-00</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">15:20:49 &nbsp;</td><TD CLASS='Notes' > 
+    Report written for FDID 19011 201023687-00</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top" align="left">15:20:49 &nbsp;</td><TD CLASS='Notes' > 
+    Report written for FDID 01001 201023687-00</TD> 
+    </TR> 
+    </table></td></tr></table></tr></table>			
+    			</BODY>
+    			</HTML>
+    			<script language="javascript" src="JSFuncs.js"></script>
   }
 end
