@@ -12,5 +12,10 @@ module Watchman
       end
       call
     end
+    
+    def current_call_incident_numbers
+      page = @client.get("AjaxDC2.php")
+      page.parser.to_s.scan(/DisplayCall\.php\?Incid\=(\d+)/).flatten
+    end
   end
 end
