@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    watchman (0.0.2)
+    watchman (0.0.4)
       mechanize
 
 GEM
