@@ -71,16 +71,23 @@ module Watchman
     end
     
     def cross_street_1
-      xpath("/html/body/table/tr[1]/td[1]/table/tr[7]/td").text.strip
+      xpath("#{main_table_path}/tr[7]/td").text.strip
     end
     
     def cross_street_2
-      xpath("/html/body/table/tr[1]/td[1]/table/tr[8]/td").text.strip
+      xpath("#{main_table_path}/tr[8]/td").text.strip
     end
     
+    def priority
+      xpath("#{main_table_path}/tr[4]/td[1]").text.strip.to_i
+    end
   private
     def nature_cell_text
-      xpath("/html/body/table/tr[1]/td[1]/table/tr[3]/td").text
+      xpath("#{main_table_path}/tr[3]/td").text
+    end
+    
+    def main_table_path
+      "/html/body/table/tr[1]/td[1]/table"
     end
     
     def xpath(path)

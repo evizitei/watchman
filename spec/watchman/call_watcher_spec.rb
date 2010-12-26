@@ -41,5 +41,9 @@ describe "Watchman::CallWatcher" do
     it "can extract the response level" do
       call.response_level.should == "Charlie"
     end
+    
+    it "can harvest the priority level" do
+      call.priority.should == 2
+    end
   end
 end
