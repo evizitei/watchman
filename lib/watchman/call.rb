@@ -23,7 +23,19 @@ module Watchman
     end
     
     def nature
-      xpath("/html/body/table/tr[1]/td[1]/table/tr[3]/td").text.strip.split("-").last
+      nature_cell_text.strip.split("-").last
+    end
+    
+    ResponseLevelMap = {"A"=>"Alpha",
+                        "B"=>"Bravo",
+                        "C"=>"Charlie",
+                        "D"=>"Delta",
+                        "E"=>"Echo",
+                        "O"=>"Omega"}
+    
+    def response_level
+      match = nature_cell_text.strip.split("-").first.scan(/^\d+([A-O])/).first.first
+      ResponseLevelMap[match]
     end
     
     def apparatus
@@ -66,7 +78,11 @@ module Watchman
       xpath("/html/body/table/tr[1]/td[1]/table/tr[8]/td").text.strip
     end
     
-    private
+  private
+    def nature_cell_text
+      xpath("/html/body/table/tr[1]/td[1]/table/tr[3]/td").text
+    end
+    
     def xpath(path)
       @page.parser.xpath(path)
     end

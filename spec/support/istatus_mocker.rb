@@ -322,7 +322,7 @@ class IstatusMocker
     </tr>
     <tr>
       <TH CLASS='Detail' align=left width=100px>Nature</TH> 
-      <TD CLASS='Detail' COLSPAN=3>69D9-SML NON DWEL STR FIRE</TD> 
+      <TD CLASS='Detail' COLSPAN=3>23C7V-SML NON DWEL STR FIRE</TD> 
     </tr>
     <tr>
       <TH CLASS='Detail' align=left width=100px>Priority</TH> 
