@@ -49,5 +49,21 @@ describe "Watchman::CallWatcher" do
     it "extracts the dispatch_code" do
       call.dispatch_code.should == "BOX"
     end
+    
+    it "can get the grid" do
+      call.grid.should == "34123B"
+    end
+    
+    it "can get the fire_area" do
+      call.fire_area.should == "19-17B"
+    end
+    
+    it "gets the time of alarm" do
+      call.time_of_alarm.should == Time.parse("12/19/2010 14:15:05")
+    end
+    
+    it "gets the on-scene time" do
+      call.time_of_first_unit_on_scene == Time.parse("12/19/2010 14:27:09")
+    end
   end
 end

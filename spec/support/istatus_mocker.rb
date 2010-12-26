@@ -349,36 +349,50 @@ class IstatusMocker
       <td class="Detail" COLSPAN="3">HIGHWAY 63 S SB</td>
     </tr>
     <tr>
-      <th class="Detail" align="left">Hyd1</th><td class="Detail" width=$dw></td><th class="Detail" align="left" width=$cw>Hyd2</th><td class="Detail"></td>
-    </tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
-    Complainant</TH> 
-    <TD CLASS='Detail' colspan=3> 
-    JEROME</TD> 
-    </tr><tr><TH CLASS='Detail' align=left width=100px> 
-    Callback</TH> 
-    <TD CLASS='Detail' colspan=3> 
-    5734410736</TD> 
-    </tr><tr><th class="Detail" align="left" width=$cw>Dispatcher</th><td class="Detail" width=$dw>AMS  </td><th class="Detail" align="left" width=$cw>CallTaker</th><td class="Detail">ALL  </td></tr><tr><TH CLASS='Detail' align=left width=100px> 
-    DispO</TH> 
-    <TD CLASS='Detail' > 
-    ND</TD> 
-    <TH CLASS='Detail' align=left width=100px> 
-    Meth. Alarm</TH> 
-    <TD CLASS='Detail' > 
-    2         </TD> 
-    </tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
-    Inc Date/Time</TH> 
-    <TD CLASS='Detail' colspan=3> 
-    12/19/2010 14:15:05</TD> 
-    </tr><tr><TH CLASS='Detail' align=left width=100px> 
-    On Scene</TH> 
-    <TD CLASS='Detail' colspan=3> 
-    12/19/2010 14:27:09</TD> 
-    </tr><tr><TH CLASS='Detail' align=left width=100px> 
-    Upgrade</TH> 
-    <TD CLASS='Detail' colspan=3> 
-    00:00:00</TD> 
-    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+      <th class="Detail" align="left">Hyd1</th>
+      <td class="Detail" width=$dw></td>
+      <th class="Detail" align="left" width=$cw>Hyd2</th>
+      <td class="Detail"></td>
+    </tr>
+    <tr>
+      <td colspan="4"><hr color=navy></td>
+    </tr>
+    <tr>
+      TH CLASS='Detail' align=left width=100px> Complainant</TH> 
+      <TD CLASS='Detail' colspan=3> JEROME</TD> 
+    </tr>
+    <tr>
+      <TH CLASS='Detail' align=left width=100px> Callback</TH> 
+      <TD CLASS='Detail' colspan=3> 5734410736</TD> 
+    </tr>
+    <tr>
+      <th class="Detail" align="left" width=$cw>Dispatcher</th>
+      <td class="Detail" width=$dw>AMS  </td>
+      <th class="Detail" align="left" width=$cw>CallTaker</th>
+      <td class="Detail">ALL  </td>
+    </tr>
+    <tr>
+      <TH CLASS='Detail' align=left width=100px> DispO</TH> 
+      <TD CLASS='Detail' > ND</TD> 
+      <TH CLASS='Detail' align=left width=100px> Meth. Alarm</TH> 
+      <TD CLASS='Detail' > 2         </TD> 
+    </tr>
+    <tr>
+      <td colspan="4"><hr color=navy></td>
+    </tr>
+    <tr>
+      <TH CLASS='Detail' align=left width=100px> Inc Date/Time</TH> 
+      <TD CLASS='Detail' colspan=3> 12/19/2010 14:15:05</TD> 
+    </tr>
+    <tr>
+      <TH CLASS='Detail' align=left width=100px> On Scene</TH> 
+      <TD CLASS='Detail' colspan=3> 12/19/2010 14:27:09</TD> 
+    </tr>
+    <tr>
+      <TH CLASS='Detail' align=left width=100px> Upgrade</TH> 
+      <TD CLASS='Detail' colspan=3> 00:00:00</TD> 
+    </tr>
+    <tr><TH CLASS='Detail' align=left width=100px> 
     Pat Contact</TH> 
     <TD CLASS='Detail' colspan=3> 
     01/01/1970 00:00:00</TD> 

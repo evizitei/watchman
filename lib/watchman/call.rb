@@ -85,6 +85,22 @@ module Watchman
     def dispatch_code
       xpath_text("#{main_table_path}/tr[4]/td[2]")
     end
+    
+    def grid
+      xpath_text("#{main_table_path}/tr[5]/td[1]")
+    end
+    
+    def fire_area
+      xpath_text("#{main_table_path}/tr[6]/td")
+    end
+    
+    def time_of_alarm
+      Time.parse(xpath_text("#{main_table_path}/tr[16]/td"))
+    end
+    
+    def time_of_first_unit_on_scene
+      Time.parse(xpath_text("#{main_table_path}/tr[17]/td"))
+    end
   private
     def nature_cell_text
       xpath_text("#{main_table_path}/tr[3]/td")
