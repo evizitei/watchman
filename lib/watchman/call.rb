@@ -23,7 +23,7 @@ module Watchman
     end
     
     def nature
-      nature_cell_text.strip.split("-").last
+      nature_cell_text.split("-").last
     end
     
     ResponseLevelMap = {"A"=>"Alpha",
@@ -34,7 +34,7 @@ module Watchman
                         "O"=>"Omega"}
     
     def response_level
-      match = nature_cell_text.strip.split("-").first.scan(/^\d+([A-O])/).first.first
+      match = nature_cell_text.split("-").first.scan(/^\d+([A-O])/).first.first
       ResponseLevelMap[match]
     end
     
@@ -71,23 +71,31 @@ module Watchman
     end
     
     def cross_street_1
-      xpath("#{main_table_path}/tr[7]/td").text.strip
+      xpath_text("#{main_table_path}/tr[7]/td")
     end
     
     def cross_street_2
-      xpath("#{main_table_path}/tr[8]/td").text.strip
+      xpath_text("#{main_table_path}/tr[8]/td")
     end
     
     def priority
-      xpath("#{main_table_path}/tr[4]/td[1]").text.strip.to_i
+      xpath_text("#{main_table_path}/tr[4]/td[1]").to_i
+    end
+    
+    def dispatch_code
+      xpath_text("#{main_table_path}/tr[4]/td[2]")
     end
   private
     def nature_cell_text
-      xpath("#{main_table_path}/tr[3]/td").text
+      xpath_text("#{main_table_path}/tr[3]/td")
     end
     
     def main_table_path
       "/html/body/table/tr[1]/td[1]/table"
+    end
+    
+    def xpath_text(path)
+      xpath(path).text.strip
     end
     
     def xpath(path)

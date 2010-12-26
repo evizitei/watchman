@@ -45,5 +45,9 @@ describe "Watchman::CallWatcher" do
     it "can harvest the priority level" do
       call.priority.should == 2
     end
+    
+    it "extracts the dispatch_code" do
+      call.dispatch_code.should == "BOX"
+    end
   end
 end
