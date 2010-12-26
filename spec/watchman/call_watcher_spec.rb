@@ -24,10 +24,19 @@ describe "Watchman::CallWatcher" do
       IstatusMocker.fake_call_path(Client.host,"201023687")
     end
     
+    let(:call){ CallWatcher.new.info_for("201023687") }
+    
     it "can find the address" do
-      call = CallWatcher.new.info_for("201023687")
       call.address.should == "7750 HIGHWAY AB E"
       call.incident_number.should == "201023687"
+    end
+    
+    it "can find the incident number" do
+      call.incident_number.should == "201023687"
+    end
+    
+    it "can find the cross-streets" do
+      call.cross_streets.should == ["RANGELINE RD S","HIGHWAY 63 S SB"]
     end
   end
 end

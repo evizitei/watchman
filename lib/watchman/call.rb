@@ -4,9 +4,6 @@ module Watchman
       @page = page
     end
     
-    def incident_number
-    end
-    
     def raw_notes
       notes.map{|n| "#{n[:time]} #{n[:text]}"}.join("|")
     end
@@ -55,6 +52,18 @@ module Watchman
         end
       end
       s_notes
+    end
+    
+    def cross_streets
+      [cross_street_1,cross_street_2]
+    end
+    
+    def cross_street_1
+      xpath("/html/body/table/tr[1]/td[1]/table/tr[7]/td").text.strip
+    end
+    
+    def cross_street_2
+      xpath("/html/body/table/tr[1]/td[1]/table/tr[8]/td").text.strip
     end
     
     private
