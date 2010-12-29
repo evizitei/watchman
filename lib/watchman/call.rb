@@ -37,9 +37,11 @@ module Watchman
       code = nature_cell_text.split("-").first
       if code == "IA"
         return "Bravo"
-      else
+      elsif code =~ /^\d/
         match = code.scan(/^\d+([A-O])/).first.first
         ResponseLevelMap[match]
+      else
+        return "N/A"
       end
     end
     

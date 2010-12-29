@@ -113,5 +113,9 @@ describe "Watchman::CallWatcher" do
      it "gets the on-scene time" do
        call.time_of_first_unit_on_scene == Time.parse("12/29/2010 15:04:18")
      end
+     
+     it "grabs the apparatus array" do
+       call.apparatus.should == ["E1201","E1501","M111","DIV61","EMS22","C1218"]
+     end
   end
 end
