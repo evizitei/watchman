@@ -19,7 +19,7 @@ describe "Watchman::CallWatcher" do
     end
   end
   
-  describe "when parsing a call" do
+  describe "when parsing an old call" do
     before(:each) do
       IstatusMocker.fake_call_path(Client.host,"201023687")
     end
@@ -65,5 +65,53 @@ describe "Watchman::CallWatcher" do
     it "gets the on-scene time" do
       call.time_of_first_unit_on_scene == Time.parse("12/19/2010 14:27:09")
     end
+  end
+  
+  describe "when parsing an active call" do
+    before(:each) do
+      IstatusMocker.fake_active_call_path(Client.host,"201024340")
+    end
+    
+    let(:call){ CallWatcher.new.info_for("201024340") }
+    
+    it "can find the address" do
+      call.address.should == "HIGHWAY WW E-BC/RANGELINE RD S"
+    end
+    
+    it "can find the incident number" do
+      call.incident_number.should == "201024340"
+    end
+   
+    it "can find the cross-streets" do
+      call.cross_streets.should == ["RANGELINE RD S","BLACKTHORNE LN S"]
+    end
+   
+    it "can extract the response level" do
+      call.response_level.should == "Bravo"
+    end
+   
+    it "can harvest the priority level" do
+      call.priority.should == 1
+    end
+    
+    it "extracts the dispatch_code" do
+      call.dispatch_code.should == "IA"
+    end
+    
+     it "can get the grid" do
+       call.grid.should == "30194B"
+     end
+     
+     it "can get the fire_area" do
+       call.fire_area.should == "12-15C"
+     end
+     
+     it "gets the time of alarm" do
+       call.time_of_alarm.should == Time.parse("12/29/2010 14:54:53")
+     end
+     
+     it "gets the on-scene time" do
+       call.time_of_first_unit_on_scene == Time.parse("12/29/2010 15:04:18")
+     end
   end
 end

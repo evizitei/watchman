@@ -17,6 +17,13 @@ class IstatusMocker
                             :body => MEDIC_PAGE_HTML)
     end
     
+    def fake_active_call_path(host,incident_number)
+      fake_login(host)
+      FakeWeb.register_uri(:get,"https://#{host}/DisplayCall.php?Incid=#{incident_number}",
+                         'content-type'=>"text/html",
+                         :body => ACTIVE_CALL_HTML)
+    end
+    
     def fake_call_path(host,incident_number)
       fake_login(host)
       FakeWeb.register_uri(:get,"https://#{host}/DisplayCall.php?Incid=#{incident_number}",
@@ -784,5 +791,372 @@ class IstatusMocker
     			</BODY>
     			</HTML>
     			<script language="javascript" src="JSFuncs.js"></script>
+  }
+  
+  ACTIVE_CALL_HTML = %Q{
+    
+    			<HTML>
+    			<HEAD>
+    				<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    				<!--<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">-->
+    				<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">				
+    				<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    				<META HTTP-EQUIV="EXPIRES" CONTENT="0">
+    				<TITLE>EnRoute I-STATUS - Version 5.10</TITLE>
+    				<LINK REL="stylesheet" HREF="DisplayFormat.css" TYPE="text/css">
+    				            <script language="javascript">
+                   //bring the page to foreground
+                   this.focus();
+                </script>				
+    			</HEAD>
+    			<BODY CLASS="Detail"  j=l>
+    			<H3 class="Status">Active Incident: 201024340</H3><table cellpadding="0" cellspacing="0" width="100%"><tr width="100%"><td valign="top" width="50%"><table cellpadding="0" cellspacing="0" width="100%"><tr><th class="Detail" align="left" width=$cw>Location</th><td class="Detail" align="left" colspan="3"><a href="SearchDStatsSubmit.php?Address=HIGHWAY WW E-BC/RANGELINE RD S-BC">HIGHWAY WW E-BC/RANGELINE RD S-BC</a></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Building</TH> 
+    <TD CLASS='Detail' COLSPAN=3> 
+                                                                               </TD> 
+    </tr><tr><th class="Detail" align="left" width=$cw>Nature</th><TD CLASS='Detail' COLSPAN=3> 
+    IA-INJURY ACCIDENT                                </TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Priority</TH> 
+    <TD CLASS='Detail' width=110px> 
+    1</TD> 
+    <TH CLASS='Detail' align=left width=100px> 
+    Dispatch Code</TH> 
+    <TD CLASS='Detail' > 
+    IA   </TD> 
+    </tr><tr><TH CLASS='Detail' align=left> 
+    Grid</TH> 
+    <TD CLASS='Detail' width=110px> 
+    30194B  </TD> 
+    <TH CLASS='Detail' align=left width=100px> 
+    Tac</TH> 
+    <TD CLASS='Detail' > 
+    BF1            </TD> 
+    </tr><tr><TH CLASS='Detail' align=left> 
+    Fire Area</TH> 
+    <td class="Detail" COLSPAN="3">12-15C</td></tr><tr><TH CLASS='Detail' align=left> 
+    Plan</TH> 
+    <TD CLASS='Detail' width=110px> 
+              </TD> 
+    <TH CLASS='Detail' align=left width=100px> 
+    Map</TH> 
+    <TD CLASS='Detail' > 
+              </TD> 
+    </tr><tr><TH CLASS='Detail' align=left> 
+    Cross1</TH> 
+    <td class="Detail" COLSPAN="3">RANGELINE RD S</td></tr><tr><TH CLASS='Detail' align=left> 
+    Cross2</TH> 
+    <td class="Detail" COLSPAN="3">BLACKTHORNE LN S</td></tr><tr><th class="Detail" align="left">Hyd1</th><td class="Detail" width=$dw>                                   </td><th class="Detail" align="left" width=$cw>Hyd2</th><td class="Detail">                                   </td></tr><tr><th class="Detail" align="left" width=$cw>Cautions</th><td class="Detail" colspan="3">HSD  HSD:At Columbia/Boone County Line - eastern continuation of Broadway-E</td></tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Complainant</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    AMBER FOSTER</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Phone</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    2204066                            </TD> 
+    </tr><tr><th class="Detail" align="left" width=$cw>Dispatcher</th><td class="Detail" width=$dw>ALL  </td><th class="Detail" align="left" width=$cw>CallTaker</th><td class="Detail">JSH  </td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    DispO</TH> 
+    <TD CLASS='Detail' > 
+    ND   </TD> 
+    <TH CLASS='Detail' align=left width=100px> 
+    Meth. Alarm</TH> 
+    <TD CLASS='Detail' > 
+    1         </TD> 
+    </tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Date Recd</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    12/29/2010 14:54:53</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    On Scene</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    12/29/2010 15:04:18</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Upgrade</TH> 
+    <TD CLASS='Detail' colspan=3> 
+    00:00:00</TD> 
+    </tr><tr><TH CLASS='Detail' align=left width=100px> 
+    Pat Contact</TH> 
+    <TD CLASS='Detail' colspan=3> 
+     00:00:00</TD> 
+    </tr></TR> 
+    </table></td><td valign="top" align="center" width="50%"><table border="1" bordercolor="#76a5b6" cellpadding="0" cellspacing="0" width="90%"><TR > 
+    <TH CLASS='Detail' align=left> 
+    Apparatus</TH> 
+    <TH CLASS='Detail' align="center"> 
+    DSP</TH> 
+    <TH CLASS='Detail' align="center"> 
+    ENR</TH> 
+    <TH CLASS='Detail' align="center"> 
+    ONS</TH> 
+    <TH CLASS='Detail' align="center"> 
+    Tran</TH> 
+    <TH CLASS='Detail' align="center"> 
+    OSH</TH> 
+    <TH CLASS='Detail' align="center"> 
+    AVL</TH> 
+    </TR> 
+    <TR > 
+    <TD CLASS='AOS' > 
+    E1201     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:55:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:56:59</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:01:54</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:28:41</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='AOS' > 
+    E1501     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:55:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:58:23</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:07:18</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:28:28</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='ENH' > 
+    M111      </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:55:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:56:53</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:07:51</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:14:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='AVL' > 
+    DIV61     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:57:14</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:57:14</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:07:58</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:29:38</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='AVL' > 
+    EMS22     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:57:36</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:57:46</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:05:29</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:24:24</TD> 
+    </TR> 
+    <TR > 
+    <TD CLASS='AVL' > 
+    C1218     </TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:57:58</TD> 
+    <TD CLASS='Detail' align="center"> 
+    14:58:09</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:04:18</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    00:00:00</TD> 
+    <TD CLASS='Detail' align="center"> 
+    15:29:36</TD> 
+    </TR> 
+    </table></td></tr><tr><td colspan="4"><hr color=navy></td></tr><tr><table cellpadding="1" cellspacing="0" width="100%"><tr><th class="Detail" align="left" width=$cw>Notes</th><td class="Detail" colspan=3"><table cellpadding="1" cellspacing="0" width="100%"><TR > 
+    <td class="Notes" valign="top">14:49:45</td><TD CLASS='Notes' > 
+    *CITY: BC-BOONE COUNTY </TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:50:14</td><TD CLASS='Notes' > 
+    NON INJURY (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:50:43</td><TD CLASS='Notes' > 
+    BROWN RANGERS VS SILV EXPLORER (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:50:47</td><TD CLASS='Notes' > 
+    BLOCKING TRAFFIC (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:52:07</td><TD CLASS='Notes' > 
+    P.D. Response area is 114 (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:52:44</td><TD CLASS='Notes' > 
+    COMP NOT INVOLVED (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:53:27</td><TD CLASS='Notes' > 
+    NOW CALLING BACK ADVISING POSSIB  (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:53:27</td><TD CLASS='Notes' > 
+    INJURY (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:53:43</td><TD CLASS='Notes' > 
+    REQ FOR A MEDIC (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:53:48</td><TD CLASS='Notes' > 
+    !*** Nature changed from A ACCIDENT (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:53:49</td><TD CLASS='Notes' > 
+    !*** (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:53:49</td><TD CLASS='Notes' > 
+    Priority changed from 3 to 1 (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:53:58</td><TD CLASS='Notes' > 
+    51 YOA M, CONSCIOUS/BREATHING (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:54:10</td><TD CLASS='Notes' > 
+    HAS CHEST INJURY DUE TO ACCIDENT (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:54:53</td><TD CLASS='Notes' > 
+    SHIPPED FROM POLICE DISPATCH, INCIDENT NUMBER 2010257111 (00000155-140)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:54:53</td><TD CLASS='Notes' > 
+    PD INCIDENT 2010257111 SHIPPED TO FIRE [00000155-140]</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:54:53</td><TD CLASS='Notes' > 
+    WITH NATURE IA-INJURY ACCIDENT [00000155-140]</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:55:00</td><TD CLASS='Notes' > 
+    Fire service incident 201024340 (00000194-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:55:15</td><TD CLASS='Notes' > 
+    TAC CHANNEL BF1 ASSIGNED (00000194-160)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:55:36</td><TD CLASS='Notes' > 
+    STATE AWARE [00000155-140]</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:56:54</td><TD CLASS='Notes' > 
+    Unit M111 Pressed Enroute</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:57:14</td><TD CLASS='Notes' > 
+    Truck DIV61 specialed themselves on the call</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:57:14</td><TD CLASS='Notes' > 
+    Unit DIV61 Pressed Enroute</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">14:59:23</td><TD CLASS='Notes' > 
+    *Police incident 2010257111 closed [00000095-130]</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:01:54</td><TD CLASS='Notes' > 
+    E1201 went in command 15:01:54 (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:02:03</td><TD CLASS='Notes' > 
+    *WW CMD  (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:02:15</td><TD CLASS='Notes' > 
+    2 VEHICLES UPRIGHT BLOCKING THE ROAD (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:02:16</td><TD CLASS='Notes' > 
+    WAY (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:04:58</td><TD CLASS='Notes' > 
+    C1218 went in command 15:04:58 (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:05:15</td><TD CLASS='Notes' > 
+    C1218 ASSUMING CMD (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:05:21</td><TD CLASS='Notes' > 
+    *HIGHWAY WW SHUT DOWN (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:06:44</td><TD CLASS='Notes' > 
+    MARTI DONE (00000152-170)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:07:51</td><TD CLASS='Notes' > 
+    Unit M111 Pressed On scene</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:07:58</td><TD CLASS='Notes' > 
+    Unit DIV61 Pressed On scene</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:09:53</td><TD CLASS='Notes' > 
+    Mark Inc Under Ctrl updated from: 12/29/10 (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:09:54</td><TD CLASS='Notes' > 
+    15:09:53 (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:14:01</td><TD CLASS='Notes' > 
+    UNIT M111 Pressed Enr To Hosp: 001 UNIVERSITY HOSPITAL Pri: 3</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:14:01</td><TD CLASS='Notes' > 
+    Beginning mileage = 0</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:22:16</td><TD CLASS='Notes' > 
+    E1201 TIMER SET TO 20 MINUTE(S) (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:29:24</td><TD CLASS='Notes' > 
+    C1218 WITH REPORT (00000192-100)</TD> 
+    </TR> 
+    <TR > 
+    <td class="Notes" valign="top">15:29:33</td><TD CLASS='Notes' > 
+    *WW NOW BACK OPEN (00000192-100)</TD> 
+    </TR> 
+    </table></td></tr></table></tr></table></html><script language="javascript" src="JSFuncs.js"></script>		
+
+
   }
 end

@@ -34,8 +34,13 @@ module Watchman
                         "O"=>"Omega"}
     
     def response_level
-      match = nature_cell_text.split("-").first.scan(/^\d+([A-O])/).first.first
-      ResponseLevelMap[match]
+      code = nature_cell_text.split("-").first
+      if code == "IA"
+        return "Bravo"
+      else
+        match = code.scan(/^\d+([A-O])/).first.first
+        ResponseLevelMap[match]
+      end
     end
     
     def apparatus
@@ -71,11 +76,19 @@ module Watchman
     end
     
     def cross_street_1
-      xpath_text("#{main_table_path}/tr[7]/td")
+      if xpath_text("#{main_table_path}/tr[7]/th") == "Cross1"
+        xpath_text("#{main_table_path}/tr[7]/td")
+      elsif xpath_text("#{main_table_path}/tr[8]/th") == "Cross1"
+        xpath_text("#{main_table_path}/tr[8]/td")
+      end
     end
     
     def cross_street_2
-      xpath_text("#{main_table_path}/tr[8]/td")
+      if xpath_text("#{main_table_path}/tr[8]/th") == "Cross2"
+        xpath_text("#{main_table_path}/tr[8]/td")
+      elsif xpath_text("#{main_table_path}/tr[9]/th") == "Cross2"
+        xpath_text("#{main_table_path}/tr[9]/td")
+      end
     end
     
     def priority
@@ -95,7 +108,11 @@ module Watchman
     end
     
     def time_of_alarm
-      Time.parse(xpath_text("#{main_table_path}/tr[16]/td"))
+      if xpath_text("#{main_table_path}/tr[16]/th") == "Inc Date/Time"
+        Time.parse(xpath_text("#{main_table_path}/tr[16]/td"))
+      elsif xpath_text("#{main_table_path}/tr[18]/th") == "Date Recd"
+        Time.parse(xpath_text("#{main_table_path}/tr[18]/td")) 
+      end
     end
     
     def time_of_first_unit_on_scene
@@ -103,7 +120,11 @@ module Watchman
     end
   private
     def nature_cell_text
-      xpath_text("#{main_table_path}/tr[3]/td")
+      if xpath_text("#{main_table_path}/tr[3]/th") == "Nature"
+        xpath_text("#{main_table_path}/tr[3]/td")
+      elsif xpath_text("#{main_table_path}/tr[4]/th") == "Nature"
+        xpath_text("#{main_table_path}/tr[4]/td")
+      end
     end
     
     def main_table_path
