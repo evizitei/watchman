@@ -60,22 +60,17 @@ module Watchman
     def spliced_notes
       s_notes = {}
       
-      notes.select{|n| n[:text] =~ /[\(\[]\d+-\d+[\)\]]$/}.each do |note|
-        note_text = note[:text]
-        note_text_arr = note_text.split(/\s/)
-        token = note_text_arr.delete_at(note_text_arr.size - 1)
-        final_text = note_text_arr.join(" ")
-        if s_notes[token].nil?
-          s_notes[token] = [{:time=>note[:time],:text=>final_text}]
-        else
-          s_notes[token] << {:time=>note[:time],:text=>final_text}
-        end
-      end
-
-      pro_qa_notes.each do |note|
-        note_text = note[:text]
-        note_text_arr = note_text.split(/\s/)
+      operator_notes = notes.select{|n| n[:text] =~ /[\(\[]\d+-\d+[\)\]]$/}
+      splicing_notes = operator_notes + pro_qa_notes()
+      splicing_notes.each do |note|
         token = "Pro QA"
+        note_text = note[:text]
+        if note[:text] =~ /[\(\[]\d+-\d+[\)\]]$/
+          note_text_arr = note_text.split(/\s/)
+          token = note_text_arr.delete_at(note_text_arr.size - 1)
+          note_text = note_text_arr.join(" ")
+        end
+        
         if s_notes[token].nil?
           s_notes[token] = [{:time=>note[:time],:text=>note_text}]
         else
