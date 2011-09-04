@@ -50,7 +50,7 @@ module Watchman
     end
     
     def pro_qa_notes
-      notes.select{|n| n[:text] =~ /^ProQA/}
+      notes.select{|n| n[:text] =~ /ProQA/}
     end
     
     def incidental_notes
@@ -59,6 +59,7 @@ module Watchman
     
     def spliced_notes
       s_notes = {}
+      
       notes.select{|n| n[:text] =~ /[\(\[]\d+-\d+[\)\]]$/}.each do |note|
         note_text = note[:text]
         note_text_arr = note_text.split(/\s/)
@@ -70,6 +71,18 @@ module Watchman
           s_notes[token] << {:time=>note[:time],:text=>final_text}
         end
       end
+
+      pro_qa_notes.each do |note|
+        note_text = note[:text]
+        note_text_arr = note_text.split(/\s/)
+        token = "Pro QA"
+        if s_notes[token].nil?
+          s_notes[token] = [{:time=>note[:time],:text=>note_text}]
+        else
+          s_notes[token] << {:time=>note[:time],:text=>note_text}
+        end
+      end
+      
       s_notes
     end
     

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'ruby-debug'
 
 include Watchman
 describe "Watchman::Client" do

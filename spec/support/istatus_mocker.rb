@@ -37,6 +37,14 @@ class IstatusMocker
                             'content-type'=>"text/html",
                             :body => CALL_LIST_HTML)
     end
+    
+    def active_call_page
+      PageMocker.new(PROQA_CALL_HTML)
+    end
+    
+    def prior_call_page
+      PageMocker.new(INCIDENT_HTML)
+    end
   end
   
   CALL_LIST_HTML = "/*{\"calls\":[{\"incnum\":\"<td class=Status style=><a href='DisplayCall.php?Incid=201023885' target=Fire>201023885&nbsp;</a></td>\",\"time\":\"13:49\",\"pri\":\"5\",\"tac\":\"CF1            \",\"addr\":\"1 BROADWAY E-CO.C1\",\"bldg\":\"BACK & NECK PAIN CENTER                                                    \",\"grid\":\"28123S  \",\"firearea\":\"112C\",\"nature\":\"55B4-ELCTRL ODOR                                  \",\"units\":\"<SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"INC\\\"><a href=ApparatusDetail.php?TruckID=SNZ1 CLASS=\\\"INC\\\"> SNZ1m</a></SPAN> \",\"dispcode\":\"SR   \"},{\"incnum\":\"<td class=Status style=background-color:#D6E5EE;><a href='DisplayCall.php?Incid=201023884' target=Fire>201023884&nbsp;</a></td>\",\"time\":\"13:42\",\"pri\":\"3\",\"tac\":\"BF1            \",\"addr\":\"607 SPRINGTIME DR-AS\",\"bldg\":\"                                                                           \",\"grid\":\"3910E   \",\"firearea\":\"17-19A\",\"nature\":\"26C2-SICK PERSON                                  \",\"units\":\"<SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"AVL\\\"><a href=ApparatusDetail.php?TruckID=G1706 CLASS=\\\"AVL\\\"> G1706</a></SPAN> <SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ONS\\\"><a href=ApparatusDetail.php?TruckID=M241 CLASS=\\\"ONS\\\"> M241m</a></SPAN> \",\"dispcode\":\"FRM  \"},{\"incnum\":\"<td class=Status style=><a href='DisplayCall.php?Incid=201023883' target=Fire>201023883&nbsp;</a></td>\",\"time\":\"13:40\",\"pri\":\"9\",\"tac\":\"AMB            \",\"addr\":\"1600 BROADWAY E-CO\",\"bldg\":\"BOONE HOSPITAL CENTER                                                      \",\"grid\":\"29073S  \",\"firearea\":\"143\",\"nature\":\"RT-ROUTINE TRANSPORT                              \",\"units\":\"<SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ENH\\\"><a href=ApparatusDetail.php?TruckID=M151 CLASS=\\\"ENH\\\"> M151m</a></SPAN> \",\"dispcode\":\"NA   \"},{\"incnum\":\"<td class=Status style=background-color:#D6E5EE;><a href='DisplayCall.php?Incid=201023879' target=Fire>201023879&nbsp;</a></td>\",\"time\":\"12:55\",\"pri\":\"9\",\"tac\":\"CF1            \",\"addr\":\"201 ORR ST-CO\",\"bldg\":\"COLUMBIA FIRE DEPT STATION 1                                               \",\"grid\":\"29073P  \",\"firearea\":\"154\",\"nature\":\"TRA-TRAINING                                      \",\"units\":\"<SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ONS\\\"><a href=ApparatusDetail.php?TruckID=Q44 CLASS=\\\"ONS\\\"> Q44</a></SPAN> <SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ONS\\\"><a href=ApparatusDetail.php?TruckID=Q6 CLASS=\\\"ONS\\\"> Q6m</a></SPAN> <SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ONS\\\"><a href=ApparatusDetail.php?TruckID=Q8 CLASS=\\\"ONS\\\"> Q8</a></SPAN> <SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ONS\\\"><a href=ApparatusDetail.php?TruckID=L1 CLASS=\\\"ONS\\\"> L1</a></SPAN> \",\"dispcode\":\"NA   \"},{\"incnum\":\"<td class=Status style=><a href='DisplayCall.php?Incid=201023876' target=Fire>201023876&nbsp;</a></td>\",\"time\":\"12:48\",\"pri\":\"9\",\"tac\":\"AMB            \",\"addr\":\"1600 BROADWAY E-CO\",\"bldg\":\"BOONE HOSPITAL CENTER                                                      \",\"grid\":\"29073S  \",\"firearea\":\"143\",\"nature\":\"LDT-LONG DISTANCE TRANSPORT                       \",\"units\":\"<SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ENH\\\"><a href=ApparatusDetail.php?TruckID=M113 CLASS=\\\"ENH\\\"> M113m</a></SPAN> \",\"dispcode\":\"NA   \"},{\"incnum\":\"<td class=Status style=background-color:#D6E5EE;><a href='DisplayCall.php?Incid=201023863' target=Fire>201023863&nbsp;</a></td>\",\"time\":\"10:55\",\"pri\":\"9\",\"tac\":\"AMB            \",\"addr\":\"1600 BROADWAY E-CO\",\"bldg\":\"BOONE HOSPITAL CENTER                                                      \",\"grid\":\"29073S  \",\"firearea\":\"143\",\"nature\":\"LDT-LONG DISTANCE TRANSPORT                       \",\"units\":\"<SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ONH\\\"><a href=ApparatusDetail.php?TruckID=M112 CLASS=\\\"ONH\\\"> M112m</a></SPAN> \",\"dispcode\":\"NA   \"},{\"incnum\":\"<td class=Status style=><a href='DisplayCall.php?Incid=201023861' target=Fire>201023861&nbsp;</a></td>\",\"time\":\"10:46\",\"pri\":\"9\",\"tac\":\"AMB            \",\"addr\":\"1 HOSPITAL DR-CO\",\"bldg\":\"UNIVERSITY HOSPITAL & CLIN MU                                              \",\"grid\":\"28134C  \",\"firearea\":\"311\",\"nature\":\"LDT-LONG DISTANCE TRANSPORT                       \",\"units\":\"<SPAN style=\\\"white-space:nowrap;\\\" CLASS=\\\"ONH\\\"><a href=ApparatusDetail.php?TruckID=M212 CLASS=\\\"ONH\\\"> M212m</a></SPAN> \",\"dispcode\":\"LDT  \"}]}*/"
@@ -1159,4 +1167,253 @@ class IstatusMocker
 
 
   }
+  
+  PROQA_CALL_HTML = %Q{
+    
+    			
+          			<HTML>
+          			<HEAD>
+          				<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+          				<!--<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">-->
+          				<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">				
+          				<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+          				<META HTTP-EQUIV="EXPIRES" CONTENT="0">
+          				<TITLE>EnRoute I-STATUS - Version 5.10</TITLE>
+          				<LINK REL="stylesheet" HREF="DisplayFormat.css" TYPE="text/css">
+          				            <script language="javascript">
+                         //bring the page to foreground
+                         this.focus();
+                      </script>				
+          			</HEAD>
+          			<BODY CLASS="Detail"  j=l>
+          			<H3 class="Status">Active Incident: 201116829</H3><table cellpadding="0" cellspacing="0" width="100%"><tr width="100%"><td valign="top" width="50%"><table cellpadding="0" cellspacing="0" width="100%"><tr><th class="Detail" align="left" width=$cw>Location</th><td class="Detail" align="left" colspan="3"><a href="SearchDStatsSubmit.php?Address=705 BUSINESS LOOP 70 W-CO">705 BUSINESS LOOP 70 W-CO</a></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+          Building</TH> 
+          <TD CLASS='Detail' COLSPAN=3> 
+          MOSERS GROCERY SUPERMARKET                                                 </TD> 
+          </tr><tr><th class="Detail" align="left" width=$cw>Nature</th><TD CLASS='Detail' COLSPAN=3> 
+          12D4-SEIZURE                                                                    </TD> 
+          </tr><tr><TH CLASS='Detail' align=left width=100px> 
+          Priority</TH> 
+          <TD CLASS='Detail' width=110px> 
+          2</TD> 
+          <TH CLASS='Detail' align=left width=100px> 
+          Dispatch Code</TH> 
+          <TD CLASS='Detail' > 
+          FRM  </TD> 
+          </tr><tr><TH CLASS='Detail' align=left> 
+          Grid</TH> 
+          <TD CLASS='Detail' width=110px> 
+          28024A  </TD> 
+          <TH CLASS='Detail' align=left width=100px> 
+          Tac</TH> 
+          <TD CLASS='Detail' > 
+          CF1            </TD> 
+          </tr><tr><TH CLASS='Detail' align=left> 
+          Fire Area</TH> 
+          <td class="Detail" COLSPAN="3">221</td></tr><tr><TH CLASS='Detail' align=left> 
+          Plan</TH> 
+          <TD CLASS='Detail' width=110px> 
+                    </TD> 
+          <TH CLASS='Detail' align=left width=100px> 
+          Map</TH> 
+          <TD CLASS='Detail' > 
+                    </TD> 
+          </tr><tr><TH CLASS='Detail' align=left> 
+          Cross1</TH> 
+          <td class="Detail" COLSPAN="3">JACKSON ST</td></tr><tr><TH CLASS='Detail' align=left> 
+          Cross2</TH> 
+          <td class="Detail" COLSPAN="3">SEXTON RD W</td></tr><tr><th class="Detail" align="left">Hyd1</th><td class="Detail" width=$dw>SE CORNER OF LOT, 705 BL70W        </td><th class="Detail" align="left" width=$cw>Hyd2</th><td class="Detail">SW CORNER OF PRICE CHOPPER         </td></tr><tr><th class="Detail" align="left" width=$cw>Cautions</th><td class="Detail" colspan="3">EC  FC                                                                     </td></tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+          Complainant</TH> 
+          <TD CLASS='Detail' colspan=3> 
+          MOSER'S DISCOUNT FOODS/DAVID</TD> 
+          </tr><tr><TH CLASS='Detail' align=left width=100px> 
+          Phone</TH> 
+          <TD CLASS='Detail' colspan=3> 
+          442-4102                           </TD> 
+          </tr><tr><th class="Detail" align="left" width=$cw>Dispatcher</th><td class="Detail" width=$dw>ALL  </td><th class="Detail" align="left" width=$cw>CallTaker</th><td class="Detail">LEE  </td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+          DispO</TH> 
+          <TD CLASS='Detail' > 
+          ND   </TD> 
+          <TH CLASS='Detail' align=left width=100px> 
+          Meth. Alarm</TH> 
+          <TD CLASS='Detail' > 
+          1         </TD> 
+          </tr><tr><td colspan="4"><hr color=navy></td></tr><tr><TH CLASS='Detail' align=left width=100px> 
+          Date Recd</TH> 
+          <TD CLASS='Detail' colspan=3> 
+          09/04/2011 16:51:35</TD> 
+          </tr><tr><TH CLASS='Detail' align=left width=100px> 
+          On Scene</TH> 
+          <TD CLASS='Detail' colspan=3> 
+          09/04/2011 16:56:19</TD> 
+          </tr><tr><TH CLASS='Detail' align=left width=100px> 
+          Upgrade</TH> 
+          <TD CLASS='Detail' colspan=3> 
+          00:00:00</TD> 
+          </tr><tr><TH CLASS='Detail' align=left width=100px> 
+          Pat Contact</TH> 
+          <TD CLASS='Detail' colspan=3> 
+           00:00:00</TD> 
+          </tr></TR> 
+          </table></td><td valign="top" align="center" width="50%"><table border="1" bordercolor="#76a5b6" cellpadding="0" cellspacing="0" width="90%"><TR > 
+          <TH CLASS='Detail' align=left> 
+          Apparatus</TH> 
+          <TH CLASS='Detail' align="center"> 
+          DSP</TH> 
+          <TH CLASS='Detail' align="center"> 
+          ENR</TH> 
+          <TH CLASS='Detail' align="center"> 
+          ONS</TH> 
+          <TH CLASS='Detail' align="center"> 
+          Tran</TH> 
+          <TH CLASS='Detail' align="center"> 
+          OSH</TH> 
+          <TH CLASS='Detail' align="center"> 
+          AVL</TH> 
+          </TR> 
+          <TR > 
+          <TD CLASS='AVL' > 
+          Q9        </TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:52:54</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:53:53</TD> 
+          </TR> 
+          <TR > 
+          <TD CLASS='ONS' > 
+          M221      </TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:52:56</TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:56:14</TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:56:19</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          </TR> 
+          <TR > 
+          <TD CLASS='AVL' > 
+          L2        </TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:53:59</TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:54:35</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          00:00:00</TD> 
+          <TD CLASS='Detail' align="center"> 
+          16:59:19</TD> 
+          </TR> 
+          </table></td></tr><tr><td colspan="4"><hr color=navy></td></tr><tr><table cellpadding="1" cellspacing="0" width="100%"><tr><th class="Detail" align="left" width=$cw>Notes</th><td class="Detail" colspan=3"><table cellpadding="1" cellspacing="0" width="100%"><TR > 
+          <td class="Notes" valign="top">16:51:35</td><TD CLASS='Notes' > 
+          *CITY: CO-COLUMBIA </TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:51:35</td><TD CLASS='Notes' > 
+          !!911 CN - PRICE CHOPPER.</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:51:47</td><TD CLASS='Notes' > 
+          ProQAE Number: 0011008763</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:46</td><TD CLASS='Notes' > 
+          !***Nature changed via ProQAE From: </TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:46</td><TD CLASS='Notes' > 
+          !PA</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:46</td><TD CLASS='Notes' > 
+          ProQAE Determinant Code: 12D4</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:46</td><TD CLASS='Notes' > 
+          ProQAE 58 year old, Male, Conscious, Breathing</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:46</td><TD CLASS='Notes' > 
+          ProQAE status uncertain.  Effective breathing not</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:46</td><TD CLASS='Notes' > 
+          ProQAE verified => 35.  Caller Statement: SEIZURE.</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:54</td><TD CLASS='Notes' > 
+          Fire service incident 201116829 (00000194-100)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:58</td><TD CLASS='Notes' > 
+          Complainant name changed from: MOSER'S (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:52:58</td><TD CLASS='Notes' > 
+          DISCOUNT FOODS (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:53:06</td><TD CLASS='Notes' > 
+          TAC CHANNEL CF1 ASSIGNED (00000194-100)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:53:08</td><TD CLASS='Notes' > 
+          ****LEFT DOOR IS BEST ACCESS (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:53:15</td><TD CLASS='Notes' > 
+          PT IN FRONT OF COURTESY BOOTH (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:53:59</td><TD CLASS='Notes' > 
+          Units 'on air': L2 (00000194-100)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:54:42</td><TD CLASS='Notes' > 
+          **PT AWAKE AND BREATHING (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:54:44</td><TD CLASS='Notes' > 
+          NO LONGER SEIZING (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:54:52</td><TD CLASS='Notes' > 
+          HIT HIS HEAD WHEN HE FEL (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:54:53</td><TD CLASS='Notes' > 
+          FELL (00000161-140)</TD> 
+          </TR> 
+          <TR > 
+          <td class="Notes" valign="top">16:55:06</td><TD CLASS='Notes' > 
+          *SEIZURE STARTED BEFORE PT FELL (00000161-140)</TD> 
+          </TR> 
+          </table></td></tr></table></tr></table></html><script language="javascript" src="JSFuncs.js"></script>		
+
+	
+
+  }
+end
+
+class PageMocker
+  attr_reader :parser
+
+  def initialize(html)
+    @parser = Nokogiri::HTML(html)
+  end
 end

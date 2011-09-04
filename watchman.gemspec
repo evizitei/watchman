@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", ">= 2.3.0"
   s.add_development_dependency "rake"
   s.add_development_dependency "fakeweb"
+  s.add_development_dependency "ruby-debug19"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
