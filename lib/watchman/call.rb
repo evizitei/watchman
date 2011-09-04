@@ -110,17 +110,25 @@ module Watchman
     end
     
     def time_of_alarm
-      if xpath_text("#{main_table_path}/tr[16]/th") == "Inc Date/Time"
-        Time.parse(xpath_text("#{main_table_path}/tr[16]/td"))
-      elsif xpath_text("#{main_table_path}/tr[18]/th") == "Date Recd"
-        Time.parse(xpath_text("#{main_table_path}/tr[18]/td")) 
+      if is_prior_call?
+        parse_time_at "#{main_table_path}/tr[16]/td"
+      elsif is_active_call?
+        parse_time_at "#{main_table_path}/tr[18]/td"
       end
     end
     
     def time_of_first_unit_on_scene
-      Time.parse(xpath_text("#{main_table_path}/tr[17]/td"))
+      if is_prior_call?
+        parse_time_at "#{main_table_path}/tr[17]/td"
+      elsif is_active_call?
+        parse_time_at "#{main_table_path}/tr[19]/td"
+      end
     end
+  
+    
   private
+  
+  
     def nature_cell_text
       if xpath_text("#{main_table_path}/tr[3]/th") == "Nature"
         xpath_text("#{main_table_path}/tr[3]/td")
@@ -129,16 +137,29 @@ module Watchman
       end
     end
     
+    def is_active_call?
+      xpath_text("#{main_table_path}/tr[18]/th") == "Date Recd"
+    end
+    
+    def is_prior_call?
+      xpath_text("#{main_table_path}/tr[16]/th") == "Inc Date/Time"
+    end
+    
     def main_table_path
       "/html/body/table/tr[1]/td[1]/table"
     end
     
+    def xpath(path)
+      @page.parser.xpath(path)
+    end
+
     def xpath_text(path)
       xpath(path).text.strip
     end
     
-    def xpath(path)
-      @page.parser.xpath(path)
+    def parse_time_at(path)
+      time_string = xpath_text(path)
+      DateTime.strptime time_string, "%m/%d/%Y %H:%M:%s"
     end
   end
 end

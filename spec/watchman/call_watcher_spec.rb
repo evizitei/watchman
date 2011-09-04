@@ -59,11 +59,11 @@ describe "Watchman::CallWatcher" do
     end
     
     it "gets the time of alarm" do
-      call.time_of_alarm.should == Time.parse("12/19/2010 14:15:05")
+      call.time_of_alarm.should == DateTime.strptime("12/19/2010 14:15:05", "%m/%d/%Y %H:%M:%s")
     end
     
     it "gets the on-scene time" do
-      call.time_of_first_unit_on_scene == Time.parse("12/19/2010 14:27:09")
+      call.time_of_first_unit_on_scene.should == DateTime.strptime("12/19/2010 14:27:09", "%m/%d/%Y %H:%M:%s" )
     end
   end
   
@@ -107,11 +107,11 @@ describe "Watchman::CallWatcher" do
      end
      
      it "gets the time of alarm" do
-       call.time_of_alarm.should == Time.parse("12/29/2010 14:54:53")
+       call.time_of_alarm.should == DateTime.strptime("12/29/2010 14:54:53", "%m/%d/%Y %H:%M:%s") 
      end
      
      it "gets the on-scene time" do
-       call.time_of_first_unit_on_scene == Time.parse("12/29/2010 15:04:18")
+       call.time_of_first_unit_on_scene.should == DateTime.strptime("12/29/2010 15:04:18", "%m/%d/%Y %H:%M:%s") 
      end
      
      it "grabs the apparatus array" do
